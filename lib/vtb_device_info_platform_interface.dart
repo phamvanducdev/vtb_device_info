@@ -20,4 +20,20 @@ abstract class VtbDeviceInfoPlatform extends PlatformInterface {
   Future<DeviceInfo?> getDeviceInfo() {
     throw UnimplementedError('deviceInfo() has not been implemented.');
   }
+
+  Future<bool> isInternetConnected() {
+    throw UnimplementedError('isInternetConnected() has not been implemented.');
+  }
+
+  Future<bool> isBluetoothEnabled() {
+    throw UnimplementedError('isBluetoothEnabled() has not been implemented.');
+  }
+
+  Stream<bool> get registerInternetStatusChange {
+    throw UnimplementedError('registerInternetStatusChange() has not been implemented.');
+  }
+
+  Stream<bool> get registerBluetoothStatusChange {
+    throw UnimplementedError('registerBluetoothStatusChange() has not been implemented.');
+  }
 }

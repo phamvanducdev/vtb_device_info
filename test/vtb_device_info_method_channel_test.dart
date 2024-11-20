@@ -13,9 +13,7 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
-        return {
-          'systemVersion': '14',
-        };
+        return {'systemVersion': '14'};
       },
     );
   });

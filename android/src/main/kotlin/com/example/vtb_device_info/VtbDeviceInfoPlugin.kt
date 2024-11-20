@@ -1,45 +1,33 @@
 package com.example.vtb_device_info
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.os.Build
-import android.provider.Settings.Secure
+import com.example.vtb_device_info.event_handler.BluetoothEventCallHandlerImpl
+import com.example.vtb_device_info.event_handler.InternetEventCallHandlerImpl
+import com.example.vtb_device_info.method_handler.MethodCallHandlerImpl
 import io.flutter.embedding.engine.plugins.FlutterPlugin
-import io.flutter.plugin.common.MethodCall
+import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 
-class VtbDeviceInfoPlugin : FlutterPlugin, MethodCallHandler {
-    private lateinit var channel: MethodChannel
-    private lateinit var context: Context
+class VtbDeviceInfoPlugin : FlutterPlugin {
+    private lateinit var methodChannel: MethodChannel
+    private lateinit var internetEventChannel: EventChannel
+    private lateinit var bluetoothEventChannel: EventChannel
 
-    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "vtb_device_info")
-        channel.setMethodCallHandler(this)
-        context = flutterPluginBinding.applicationContext
-    }
+    override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        methodChannel = MethodChannel(binding.binaryMessenger, "vtb_device_info")
+        methodChannel.setMethodCallHandler(MethodCallHandlerImpl(binding.applicationContext))
 
-    @SuppressLint("HardwareIds")
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        when (call.method) {
-            "getDeviceInfo" -> {
-                result.success(
-                    mapOf(
-                        "deviceId" to Secure.getString(context.contentResolver, Secure.ANDROID_ID),
-                        "deviceName" to Build.MODEL,
-                        "deviceModel" to Build.PRODUCT,
-                        "systemName" to "Android",
-                        "systemVersion" to Build.VERSION.RELEASE
-                    )
-                )
-            }
+        internetEventChannel =
+            EventChannel(binding.binaryMessenger, "vtb_device_info/internet_status")
+        internetEventChannel.setStreamHandler(InternetEventCallHandlerImpl(binding.applicationContext))
 
-            else -> result.notImplemented()
-        }
+        bluetoothEventChannel =
+            EventChannel(binding.binaryMessenger, "vtb_device_info/bluetooth_status")
+        bluetoothEventChannel.setStreamHandler(BluetoothEventCallHandlerImpl(binding.applicationContext))
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel.setMethodCallHandler(null)
+        methodChannel.setMethodCallHandler(null)
+        internetEventChannel.setStreamHandler(null)
+        bluetoothEventChannel.setStreamHandler(null)
     }
 }

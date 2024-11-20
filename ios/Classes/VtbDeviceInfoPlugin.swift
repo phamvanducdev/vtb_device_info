@@ -1,4 +1,6 @@
+import CoreBluetooth
 import Flutter
+import Network
 import UIKit
 
 public class VtbDeviceInfoPlugin: NSObject, FlutterPlugin {
@@ -20,8 +22,28 @@ public class VtbDeviceInfoPlugin: NSObject, FlutterPlugin {
           "systemVersion": device.systemVersion,
         ]
       result(deviceInfo)
+    case "isInternetConnected":
+      result(isInternetConnected())
+    case "isBluetoothEnabled":
+      result(isBluetoothEnabled())
     default:
       result(FlutterMethodNotImplemented)
     }
+  }
+
+  private func isInternetConnected() -> Bool {
+    let monitor = NWPathMonitor()
+    var isConnected = false
+    let queue = DispatchQueue(label: "InternetMonitor")
+    monitor.pathUpdateHandler = { 
+      path in isConnected = path.status == .satisfied
+    }
+    monitor.start(queue: queue)
+    return isConnected
+  }
+
+  private func isBluetoothEnabled() -> Bool {
+    let bluetoothManager = CBCentralManager()
+    return bluetoothManager.state == .poweredOn
   }
 }
