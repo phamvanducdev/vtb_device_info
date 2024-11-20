@@ -1,4 +1,4 @@
-package com.example.vtb_device_info.helper
+package com.example.vtb_device_info.helpers
 
 import android.annotation.SuppressLint
 import android.content.Context

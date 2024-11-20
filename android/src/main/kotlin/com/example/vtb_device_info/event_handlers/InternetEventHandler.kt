@@ -1,4 +1,4 @@
-package com.example.vtb_device_info.event_handler
+package com.example.vtb_device_info.event_handlers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,10 +10,10 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.RequiresApi
-import com.example.vtb_device_info.helper.ConnectionHelper
+import com.example.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
-internal class InternetEventCallHandlerImpl(private val context: Context) : EventChannel.StreamHandler {
+internal class InternetEventHandler(private val context: Context) : EventChannel.StreamHandler {
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private val mainHandler = Handler(Looper.getMainLooper())
     private var eventSink: EventChannel.EventSink? = null

@@ -1,8 +1,8 @@
 package com.example.vtb_device_info
 
-import com.example.vtb_device_info.event_handler.BluetoothEventCallHandlerImpl
-import com.example.vtb_device_info.event_handler.InternetEventCallHandlerImpl
-import com.example.vtb_device_info.method_handler.MethodCallHandlerImpl
+import com.example.vtb_device_info.event_handlers.BluetoothEventHandler
+import com.example.vtb_device_info.event_handlers.InternetEventHandler
+import com.example.vtb_device_info.method_handlers.MethodCallHandlerImpl
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
@@ -18,11 +18,11 @@ class VtbDeviceInfoPlugin : FlutterPlugin {
 
         internetEventChannel =
             EventChannel(binding.binaryMessenger, "vtb_device_info/internet_status")
-        internetEventChannel.setStreamHandler(InternetEventCallHandlerImpl(binding.applicationContext))
+        internetEventChannel.setStreamHandler(InternetEventHandler(binding.applicationContext))
 
         bluetoothEventChannel =
             EventChannel(binding.binaryMessenger, "vtb_device_info/bluetooth_status")
-        bluetoothEventChannel.setStreamHandler(BluetoothEventCallHandlerImpl(binding.applicationContext))
+        bluetoothEventChannel.setStreamHandler(BluetoothEventHandler(binding.applicationContext))
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {

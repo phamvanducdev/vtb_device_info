@@ -1,4 +1,4 @@
-package com.example.vtb_device_info.event_handler
+package com.example.vtb_device_info.event_handlers
 
 import android.bluetooth.BluetoothAdapter
 import android.content.BroadcastReceiver
@@ -7,9 +7,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
+import com.example.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
-internal class BluetoothEventCallHandlerImpl(private val context: Context) :
+internal class BluetoothEventHandler(private val context: Context) :
     EventChannel.StreamHandler {
     private var bluetoothReceiver: BroadcastReceiver? = null
     private val mainHandler = Handler(Looper.getMainLooper())
@@ -30,6 +31,9 @@ internal class BluetoothEventCallHandlerImpl(private val context: Context) :
 
         val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
         context.registerReceiver(bluetoothReceiver, filter)
+
+        // Send current value at register time
+        sendEvent(ConnectionHelper.isBluetoothEnabled(context))
     }
 
     override fun onCancel(arguments: Any?) {

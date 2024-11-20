@@ -1,12 +1,9 @@
-package com.example.vtb_device_info.method_handler
+package com.example.vtb_device_info.method_handlers
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.provider.Settings.Secure.ANDROID_ID
-import android.provider.Settings.Secure.getString
-import com.example.vtb_device_info.helper.ConnectionHelper
-import com.example.vtb_device_info.helper.DeviceInfoHelper
+import com.example.vtb_device_info.helpers.ConnectionHelper
+import com.example.vtb_device_info.helpers.DeviceInfoHelper
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

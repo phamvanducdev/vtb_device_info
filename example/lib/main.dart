@@ -296,7 +296,7 @@ class _VtbDeviceInfoAppState extends State<VtbDeviceInfoApp> {
             stream: _isBluetoothStatusStream,
             builder: (context, snapshot) {
               final isConnected = snapshot.data ?? false;
-              return Text('Bluetooth Connected: $isConnected');
+              return Text('Bluetooth Enable: $isConnected');
             },
           ),
       ],
