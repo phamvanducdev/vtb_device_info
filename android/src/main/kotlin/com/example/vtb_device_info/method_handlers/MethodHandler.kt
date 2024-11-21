@@ -1,36 +1,71 @@
 package com.example.vtb_device_info.method_handlers
 
-import android.content.Context
+import android.app.Activity
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import com.example.vtb_device_info.helpers.ConnectionHelper
 import com.example.vtb_device_info.helpers.DeviceInfoHelper
+import com.example.vtb_device_info.helpers.LocationHelper
+import com.example.vtb_device_info.helpers.PermissionHelper
+import com.example.vtb_device_info.helpers.PermissionHelper.Companion.PermissionResultCallback
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 
-internal class MethodCallHandlerImpl(private val context: Context) : MethodCallHandler {
+internal class MethodHandler(
+    private val activity: Activity?,
+    private val deviceInfoHelper: DeviceInfoHelper,
+    private val connectionHelper: ConnectionHelper,
+    private val permissionHelper: PermissionHelper,
+    private val locationHelper: LocationHelper,
+) : MethodCallHandler {
+    private val mainHandler = Handler(Looper.getMainLooper())
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
-            "getDeviceInfo" -> {
-                result.success(DeviceInfoHelper.getDeviceInfo(context))
-            }
-
-            "isInternetConnected" -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    result.success(ConnectionHelper.isInternetConnected(context))
-                } else {
-                    result.notImplemented()
-                }
-            }
-
-            "isBluetoothEnabled" -> {
-                result.success(ConnectionHelper.isBluetoothEnabled(context))
-            }
-
+            "getDeviceInfo" -> onHandleGetDeviceInfo(result)
+            "checkInternetConnected" -> onHandleCheckInternetConnected(result)
+            "checkBluetoothEnabled" -> onHandleCheckBluetoothEnabled(result)
+            "getCurrentLocation" -> onHandleGetCurrentLocation(result)
+            "checkLocationPermissionGranted" -> onHandleCheckLocationPermissionGranted(result)
+            "requestLocationPermission" -> onHandleRequestLocationPermission(result)
             else -> result.notImplemented()
         }
     }
 
+    private fun onHandleGetDeviceInfo(result: MethodChannel.Result) {
+        result.success(deviceInfoHelper.getDeviceInfo())
+    }
 
+    private fun onHandleCheckInternetConnected(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            result.success(connectionHelper.isInternetConnected())
+        } else {
+            result.notImplemented()
+        }
+    }
+
+    private fun onHandleCheckBluetoothEnabled(result: MethodChannel.Result) {
+        result.success(connectionHelper.isBluetoothEnabled())
+    }
+
+    private fun onHandleGetCurrentLocation(result: MethodChannel.Result) {
+        result.success(locationHelper.getCurrentLocation())
+    }
+
+    private fun onHandleCheckLocationPermissionGranted(result: MethodChannel.Result) {
+        result.success(permissionHelper.isLocationPermissionGranted())
+    }
+
+    private fun onHandleRequestLocationPermission(result: MethodChannel.Result) {
+        permissionHelper.requestLocationPermission(
+            activity = activity,
+            resultCallback = object : PermissionResultCallback {
+                override fun onResult(granted: Boolean) {
+                    mainHandler.post { result.success(granted) }
+                }
+            },
+        )
+    }
 }

@@ -10,8 +10,10 @@ import android.os.Looper
 import com.example.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
-internal class BluetoothEventHandler(private val context: Context) :
-    EventChannel.StreamHandler {
+internal class BluetoothEventHandler(
+    private val context: Context,
+    private val connectionHelper: ConnectionHelper,
+) : EventChannel.StreamHandler {
     private var bluetoothReceiver: BroadcastReceiver? = null
     private val mainHandler = Handler(Looper.getMainLooper())
     private var eventSink: EventChannel.EventSink? = null
@@ -33,7 +35,7 @@ internal class BluetoothEventHandler(private val context: Context) :
         context.registerReceiver(bluetoothReceiver, filter)
 
         // Send current value at register time
-        sendEvent(ConnectionHelper.isBluetoothEnabled(context))
+        sendEvent(connectionHelper.isBluetoothEnabled())
     }
 
     override fun onCancel(arguments: Any?) {

@@ -8,9 +8,9 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 
-object ConnectionHelper {
+class ConnectionHelper(private val context: Context) {
     @RequiresApi(Build.VERSION_CODES.M)
-    fun isInternetConnected(context: Context): Boolean {
+    fun isInternetConnected(): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
@@ -19,7 +19,7 @@ object ConnectionHelper {
         return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    fun isBluetoothEnabled(context: Context): Boolean {
+    fun isBluetoothEnabled(): Boolean {
         val bluetoothManager =
             context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.adapter

@@ -6,9 +6,9 @@ import android.os.Build
 import android.provider.Settings.Secure.ANDROID_ID
 import android.provider.Settings.Secure.getString
 
-object DeviceInfoHelper {
+class DeviceInfoHelper(private val context: Context) {
     @SuppressLint("HardwareIds")
-    fun getDeviceInfo(context: Context): Map<String, String> {
+    fun getDeviceInfo(): Map<String, String> {
         return mapOf(
             "deviceId" to getString(context.contentResolver, ANDROID_ID),
             "deviceName" to Build.MODEL,

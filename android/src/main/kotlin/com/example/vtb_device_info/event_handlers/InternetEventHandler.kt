@@ -13,7 +13,10 @@ import androidx.annotation.RequiresApi
 import com.example.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
-internal class InternetEventHandler(private val context: Context) : EventChannel.StreamHandler {
+internal class InternetEventHandler(
+    private val context: Context,
+    private val connectionHelper: ConnectionHelper,
+) : EventChannel.StreamHandler {
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private val mainHandler = Handler(Looper.getMainLooper())
     private var eventSink: EventChannel.EventSink? = null
@@ -38,7 +41,7 @@ internal class InternetEventHandler(private val context: Context) : EventChannel
             receiver = object : BroadcastReceiver() {
                 @RequiresApi(Build.VERSION_CODES.M)
                 override fun onReceive(context: Context, intent: Intent) {
-                    sendEvent(ConnectionHelper.isInternetConnected(context))
+                    sendEvent(connectionHelper.isInternetConnected())
                 }
             }
             val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
@@ -67,4 +70,5 @@ internal class InternetEventHandler(private val context: Context) : EventChannel
             eventSink?.success(isConnected)
         }
     }
+
 }

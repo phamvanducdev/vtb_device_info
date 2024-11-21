@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class DeviceInfo {
   final String deviceId;
   final String deviceName;
@@ -23,8 +25,16 @@ class DeviceInfo {
     );
   }
 
-  @override
-  String toString() {
-    return 'DeviceInfo(deviceId: $deviceId, deviceName: $deviceName, deviceModel: $deviceModel, systemName: $systemName, systemVersion: $systemVersion)';
+  Map<String, dynamic> toJson() {
+    return {
+      'deviceId': deviceId,
+      'deviceName': deviceName,
+      'deviceModel': deviceModel,
+      'systemName': systemName,
+      'systemVersion': systemVersion,
+    };
   }
+
+  @override
+  String toString() => const JsonEncoder.withIndent('    ').convert(toJson());
 }
