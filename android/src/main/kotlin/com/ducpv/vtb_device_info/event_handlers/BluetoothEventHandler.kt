@@ -1,4 +1,4 @@
-package com.example.vtb_device_info.event_handlers
+package com.ducpv.vtb_device_info.event_handlers
 
 import android.bluetooth.BluetoothAdapter
 import android.content.BroadcastReceiver
@@ -7,7 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
-import com.example.vtb_device_info.helpers.ConnectionHelper
+import com.ducpv.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
 internal class BluetoothEventHandler(

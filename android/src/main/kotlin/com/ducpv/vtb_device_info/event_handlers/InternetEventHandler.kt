@@ -1,4 +1,4 @@
-package com.example.vtb_device_info.event_handlers
+package com.ducpv.vtb_device_info.event_handlers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,7 +10,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.RequiresApi
-import com.example.vtb_device_info.helpers.ConnectionHelper
+import com.ducpv.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
 internal class InternetEventHandler(

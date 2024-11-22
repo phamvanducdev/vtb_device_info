@@ -21,7 +21,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.vtb_device_info
+        package: com.ducpv.vtb_device_info
         pluginClass: VtbDeviceInfoPlugin
       ios:
         pluginClass: VtbDeviceInfoPlugin

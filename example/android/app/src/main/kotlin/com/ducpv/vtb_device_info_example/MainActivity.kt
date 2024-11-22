@@ -1,4 +1,4 @@
-package com.example.vtb_device_info_example
+package com.ducpv.vtb_device_info_example
 
 import io.flutter.embedding.android.FlutterActivity
 

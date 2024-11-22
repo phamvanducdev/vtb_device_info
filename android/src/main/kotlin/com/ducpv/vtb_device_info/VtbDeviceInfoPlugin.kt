@@ -1,14 +1,14 @@
-package com.example.vtb_device_info
+package com.ducpv.vtb_device_info
 
 import android.app.Activity
-import com.example.vtb_device_info.event_handlers.BluetoothEventHandler
-import com.example.vtb_device_info.event_handlers.InternetEventHandler
-import com.example.vtb_device_info.event_handlers.LocationEventHandler
-import com.example.vtb_device_info.helpers.ConnectionHelper
-import com.example.vtb_device_info.helpers.DeviceInfoHelper
-import com.example.vtb_device_info.helpers.LocationHelper
-import com.example.vtb_device_info.helpers.PermissionHelper
-import com.example.vtb_device_info.method_handlers.MethodHandler
+import com.ducpv.vtb_device_info.event_handlers.BluetoothEventHandler
+import com.ducpv.vtb_device_info.event_handlers.InternetEventHandler
+import com.ducpv.vtb_device_info.event_handlers.LocationEventHandler
+import com.ducpv.vtb_device_info.helpers.ConnectionHelper
+import com.ducpv.vtb_device_info.helpers.DeviceInfoHelper
+import com.ducpv.vtb_device_info.helpers.LocationHelper
+import com.ducpv.vtb_device_info.helpers.PermissionHelper
+import com.ducpv.vtb_device_info.method_handlers.MethodHandler
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding

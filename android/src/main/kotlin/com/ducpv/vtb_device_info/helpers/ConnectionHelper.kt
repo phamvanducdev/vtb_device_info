@@ -1,4 +1,4 @@
-package com.example.vtb_device_info.helpers
+package com.ducpv.vtb_device_info.helpers
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager

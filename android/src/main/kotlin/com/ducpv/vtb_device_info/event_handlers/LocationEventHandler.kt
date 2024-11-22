@@ -1,4 +1,4 @@
-package com.example.vtb_device_info.event_handlers
+package com.ducpv.vtb_device_info.event_handlers
 
 import android.content.Context
 import android.location.Location

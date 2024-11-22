@@ -1,4 +1,4 @@
-group = "com.example.vtb_device_info"
+group = "com.ducpv.vtb_device_info"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -26,7 +26,7 @@ apply plugin: "kotlin-android"
 
 android {
     if (project.android.hasProperty("namespace")) {
-        namespace = "com.example.vtb_device_info"
+        namespace = "com.ducpv.vtb_device_info"
     }
 
     compileSdk = 34
