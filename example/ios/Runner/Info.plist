@@ -46,10 +46,10 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Provider BLUETOOTH permission</string>
+	<string>PROVIDER_BLUETOOTH_PERMISSION_MESSAGE</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Provider LOCATION permission</string>
+	<string>PROVIDER_LOCATION_PERMISSION_MESSAGE</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Provider LOCATION permission</string>
+	<string>PROVIDER_LOCATION_PERMISSION_MESSAGE</string>
 </dict>
 </plist>

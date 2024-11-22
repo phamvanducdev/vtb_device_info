@@ -6,13 +6,7 @@ import 'vtb_device_info_platform_interface.dart';
 class VtbDeviceInfo {
   VtbDeviceInfo._();
 
-  static VtbDeviceInfo _instance = VtbDeviceInfo._();
-
-  static VtbDeviceInfo get instance => _instance;
-
-  static set instance(VtbDeviceInfo instance) {
-    _instance = instance;
-  }
+  static VtbDeviceInfo instance = VtbDeviceInfo._();
 
   /// DEVICE_INFO
   Future<DeviceInfo?> getDeviceInfo() {

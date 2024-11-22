@@ -9,7 +9,7 @@ import Flutter
 
 class BluetoothEventHandler: NSObject, FlutterStreamHandler {
     private let connectionHelper: ConnectionHelper
-    // private var eventSink: FlutterEventSink?
+    private var eventSink: FlutterEventSink?
     
     init(connectionHelper: ConnectionHelper) {
         self.connectionHelper = connectionHelper
@@ -18,15 +18,17 @@ class BluetoothEventHandler: NSObject, FlutterStreamHandler {
     func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink)
     -> FlutterError?
     {
-        // self.eventSink = events
+        self.eventSink = events
         connectionHelper.onListenBluetoothStatusChange { isEnabled in
-            events(isEnabled)
+            DispatchQueue.main.async {
+                self.eventSink?(isEnabled)
+            }
         }
         return nil
     }
     
     func onCancel(withArguments arguments: Any?) -> FlutterError? {
-        // self.eventSink = nil
+        self.eventSink = nil
         return nil
     }
 }

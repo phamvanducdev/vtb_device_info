@@ -20,7 +20,10 @@ class LocationEventHandler: NSObject, FlutterStreamHandler, CLLocationManagerDel
         locationManager.delegate = self
     }
     
-    func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+    func onListen(
+        withArguments arguments: Any?,
+        eventSink events: @escaping FlutterEventSink
+    ) -> FlutterError? {
         self.eventSink = events
         permissionHelper.isLocationServiceEnabled { isEnabled in
             if (isEnabled) {
