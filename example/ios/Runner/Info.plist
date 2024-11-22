@@ -46,6 +46,10 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Ứng dụng cần truy cập Bluetooth để xác định trạng thái thiết bị.</string>
+	<string>Provider BLUETOOTH permission</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Provider LOCATION permission</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Provider LOCATION permission</string>
 </dict>
 </plist>

@@ -1,3 +1,10 @@
+//
+//  ConnectionHelper.swift
+//  Pods
+//
+//  Created by Duc Pham on 20/11/24.
+//
+
 import CoreBluetooth
 import Network
 
@@ -5,12 +12,12 @@ class ConnectionHelper: NSObject, CBCentralManagerDelegate {
     private var bluetoothManager: CBCentralManager?
     private var bluetoothStateHandler: ((Bool) -> Void)?
     private var internetStateHandler: ((Bool) -> Void)?
-
+    
     override init() {
         super.init()
         bluetoothManager = CBCentralManager(delegate: self, queue: nil)
     }
-
+    
     // MARK: - Internet Connectivity
     func onListenInternetStatusChange(handler: @escaping (Bool) -> Void) {
         internetStateHandler = handler
@@ -21,7 +28,7 @@ class ConnectionHelper: NSObject, CBCentralManagerDelegate {
         }
         monitor.start(queue: queue)
     }
-
+    
     func isInternetConnected(completion: @escaping (Bool) -> Void) {
         let monitor = NWPathMonitor()
         let queue = DispatchQueue.global(qos: .background)
@@ -31,7 +38,7 @@ class ConnectionHelper: NSObject, CBCentralManagerDelegate {
         }
         monitor.start(queue: queue)
     }
-
+    
     // MARK: - Bluetooth Connectivity
     func onListenBluetoothStatusChange(handler: @escaping (Bool) -> Void) {
         bluetoothStateHandler = handler
@@ -42,7 +49,7 @@ class ConnectionHelper: NSObject, CBCentralManagerDelegate {
             handler(false)
         }
     }
-
+    
     func isBluetoothEnabled(completion: @escaping (Bool) -> Void) {
         if let bluetoothManager = bluetoothManager {
             completion(bluetoothManager.state == .poweredOn)
@@ -50,7 +57,7 @@ class ConnectionHelper: NSObject, CBCentralManagerDelegate {
             completion(false)
         }
     }
-
+    
     // MARK: - CBCentralManagerDelegate
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         let isBluetoothOn = central.state == .poweredOn

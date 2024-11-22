@@ -35,7 +35,7 @@ class _GetCurrentLocationWidgetState extends State<GetCurrentLocationWidget> {
       await Future.delayed(const Duration(seconds: 1));
       _currentLocation = await VtbDeviceInfo.instance.getCurrentLocation();
       _statusMessage = null;
-    } on PlatformException {
+    } on Exception {
       _statusMessage = 'Failed to get current location.';
     }
 
@@ -60,7 +60,7 @@ class _GetCurrentLocationWidgetState extends State<GetCurrentLocationWidget> {
             children: [
               const Text(
                 'Location permission',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
               ),
               ElevatedButton(
                 onPressed: requestPermission,
@@ -73,7 +73,7 @@ class _GetCurrentLocationWidgetState extends State<GetCurrentLocationWidget> {
           children: [
             const Text(
               'Get Current Location',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(
               onPressed: _permissionGranted ? getCurrentLocation : null,

@@ -10,7 +10,7 @@ class MethodChannelVtbDeviceInfo extends VtbDeviceInfoPlatform {
   final bluetoothEventChannel = const EventChannel('vtb_device_info/bluetooth');
   final deviceLocationEventChannel = const EventChannel('vtb_device_info/location');
 
-  /// DEVICE INFO
+  /// DEVICE_INFO
   @override
   Future<DeviceInfo?> getDeviceInfo() async {
     final result = await methodChannel.invokeMethod('getDeviceInfo');

@@ -24,7 +24,7 @@ class _GetCurrentBluetoothStatusWidgetState extends State<GetCurrentBluetoothSta
       _isEnabled = await VtbDeviceInfo.instance.checkBluetoothEnabled();
       _statusMessage = null;
     } on PlatformException {
-      _statusMessage = 'Failed to get current bluetooth current status.';
+      _statusMessage = 'Failed to get current bluetooth status.';
     }
 
     if (!mounted) return;
@@ -41,7 +41,7 @@ class _GetCurrentBluetoothStatusWidgetState extends State<GetCurrentBluetoothSta
           children: [
             const Text(
               'Get Current Bluetooth Status',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(
               onPressed: getBluetoothStatus,

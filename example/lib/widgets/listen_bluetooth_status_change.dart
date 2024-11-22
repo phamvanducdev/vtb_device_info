@@ -53,7 +53,7 @@ class _ListenBluetoothStatusChangeWidgetState extends State<ListenBluetoothStatu
           children: [
             const Text(
               'Listen Bluetooth Status Change',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(
               onPressed: onRegister,

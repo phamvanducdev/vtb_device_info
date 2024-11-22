@@ -41,7 +41,7 @@ class _GetCurrentInternetStatusWidgetState extends State<GetCurrentInternetStatu
           children: [
             const Text(
               'Get Current Internet Status',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(
               onPressed: getInternetConnected,

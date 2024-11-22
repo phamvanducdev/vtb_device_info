@@ -31,10 +31,10 @@ internal class LocationEventHandler(
                         LocationManager.NETWORK_PROVIDER, 5000L, 10f, mLocationListener!!
                     )
                 } catch (e: Exception) {
-                    sendError(Exception("Permission not granted."))
+                    sendError(Exception("Location permission not granted"))
                 }
             } else {
-                sendError(Exception("Location service is disabled."))
+                sendError(Exception("Location services are disabled"))
             }
         }
     }
@@ -61,7 +61,7 @@ internal class LocationEventHandler(
 
     private fun sendError(error: Exception) {
         mainHandler.post {
-            eventSink?.error("vtb_device_info", error.message, null);
+            eventSink?.error("LOCATION_ERROR", error.message, null);
         }
     }
 }

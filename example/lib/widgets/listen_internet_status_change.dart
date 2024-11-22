@@ -53,7 +53,7 @@ class _ListenInternetStatusChangeWidgetState extends State<ListenInternetStatusC
           children: [
             const Text(
               'Listen Internet Status Change',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(
               onPressed: onRegister,

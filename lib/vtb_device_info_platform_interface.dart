@@ -18,7 +18,7 @@ abstract class VtbDeviceInfoPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  /// DEVICE INFO
+  /// DEVICE_INFO
   Future<DeviceInfo?> getDeviceInfo() {
     throw UnimplementedError('getDeviceInfo() has not been implemented.');
   }

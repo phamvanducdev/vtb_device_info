@@ -14,7 +14,7 @@ class VtbDeviceInfo {
     _instance = instance;
   }
 
-  /// DEVICE INFO
+  /// DEVICE_INFO
   Future<DeviceInfo?> getDeviceInfo() {
     return VtbDeviceInfoPlatform.instance.getDeviceInfo();
   }

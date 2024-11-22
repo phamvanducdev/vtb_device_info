@@ -1,3 +1,10 @@
+//
+//  DeviceInfoHelper.swift
+//  Pods
+//
+//  Created by Duc Pham on 20/11/24.
+//
+
 import UIKit
 
 class DeviceInfoHelper {

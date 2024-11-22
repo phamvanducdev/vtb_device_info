@@ -43,7 +43,7 @@ class _GetDeviceInfoWidgetState extends State<GetDeviceInfoWidget> {
           children: [
             const Text(
               'Get Device Info',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(onPressed: getDeviceInfo, child: const Text('Get')),
           ],

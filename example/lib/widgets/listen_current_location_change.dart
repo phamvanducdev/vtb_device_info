@@ -54,7 +54,7 @@ class _ListentCurrentLocationChangeWidgetState extends State<ListentCurrentLocat
           children: [
             const Text(
               'Listen Current Location Change',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(
               onPressed: onRegister,
