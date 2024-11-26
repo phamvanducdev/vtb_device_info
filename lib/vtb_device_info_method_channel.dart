@@ -9,6 +9,7 @@ class MethodChannelVtbDeviceInfo extends VtbDeviceInfoPlatform {
   final internetEventChannel = const EventChannel('vtb_device_info/internet');
   final bluetoothEventChannel = const EventChannel('vtb_device_info/bluetooth');
   final deviceLocationEventChannel = const EventChannel('vtb_device_info/location');
+  final deviceLocationBackgroundEventChannel = const EventChannel('vtb_device_info/location_background');
 
   /// DEVICE_INFO
   @override
@@ -63,6 +64,13 @@ class MethodChannelVtbDeviceInfo extends VtbDeviceInfoPlatform {
   @override
   Stream<DeviceLocation?> get registerDeviceLocationChange {
     return deviceLocationEventChannel
+        .receiveBroadcastStream()
+        .map((event) => DeviceLocation.fromMap(event.cast<String, dynamic>()));
+  }
+
+  @override
+  Stream<DeviceLocation?> get registerDeviceLocationBackgroundChange {
+    return deviceLocationBackgroundEventChannel
         .receiveBroadcastStream()
         .map((event) => DeviceLocation.fromMap(event.cast<String, dynamic>()));
   }

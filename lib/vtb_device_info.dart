@@ -41,6 +41,10 @@ class VtbDeviceInfo {
     return VtbDeviceInfoPlatform.instance.registerDeviceLocationChange;
   }
 
+  Stream<DeviceLocation?> get registerDeviceLocationBackgroundChange {
+    return VtbDeviceInfoPlatform.instance.registerDeviceLocationBackgroundChange;
+  }
+
   /// PERMISSIONS
   Future<bool> checkLocationPermissionGranted() {
     return VtbDeviceInfoPlatform.instance.checkLocationPermissionGranted();

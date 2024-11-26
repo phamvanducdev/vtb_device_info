@@ -50,6 +50,10 @@ abstract class VtbDeviceInfoPlatform extends PlatformInterface {
     throw UnimplementedError('registerDeviceLocationChange() has not been implemented.');
   }
 
+  Stream<DeviceLocation?> get registerDeviceLocationBackgroundChange {
+    throw UnimplementedError('registerDeviceLocationBackgroundChange() has not been implemented.');
+  }
+
   /// PERMISSIONS
   Future<bool> checkLocationPermissionGranted() {
     throw UnimplementedError('checkLocationPermissionGranted() has not been implemented.');

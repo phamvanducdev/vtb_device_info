@@ -3,14 +3,14 @@ import 'package:vtb_device_info/models/device_location.dart';
 import 'package:vtb_device_info/vtb_device_info.dart';
 import 'package:vtb_device_info_example/colors.dart';
 
-class ListentCurrentLocationChangeWidget extends StatefulWidget {
-  const ListentCurrentLocationChangeWidget({super.key});
+class ListentCurrentLocationBackgroundChangeWidget extends StatefulWidget {
+  const ListentCurrentLocationBackgroundChangeWidget({super.key});
 
   @override
-  State<ListentCurrentLocationChangeWidget> createState() => _ListentCurrentLocationChangeWidgetState();
+  State<ListentCurrentLocationBackgroundChangeWidget> createState() => _ListentCurrentLocationBackgroundChangeWidgetState();
 }
 
-class _ListentCurrentLocationChangeWidgetState extends State<ListentCurrentLocationChangeWidget> {
+class _ListentCurrentLocationBackgroundChangeWidgetState extends State<ListentCurrentLocationBackgroundChangeWidget> {
   Stream<DeviceLocation?>? _deviceLocationStream;
   String? _statusMessage;
 
@@ -21,7 +21,7 @@ class _ListentCurrentLocationChangeWidgetState extends State<ListentCurrentLocat
     });
     try {
       await Future.delayed(const Duration(seconds: 1));
-      _deviceLocationStream = VtbDeviceInfo.instance.registerDeviceLocationChange;
+      _deviceLocationStream = VtbDeviceInfo.instance.registerDeviceLocationBackgroundChange;
       _statusMessage = 'Listening...';
     } on Exception {
       _statusMessage = 'Failed to register device location.';
@@ -52,7 +52,7 @@ class _ListentCurrentLocationChangeWidgetState extends State<ListentCurrentLocat
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Listen Current Location Change',
+              'Listen Location Background Change',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: VtbColors.vtbDartBlue),
             ),
             ElevatedButton(

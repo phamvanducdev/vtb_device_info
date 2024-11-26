@@ -1,5 +1,6 @@
 package com.ducpv.vtb_device_info.method_handlers
 
+import android.Manifest
 import android.app.Activity
 import android.os.Build
 import android.os.Handler
@@ -55,12 +56,15 @@ internal class MethodHandler(
     }
 
     private fun onHandleCheckLocationPermissionGranted(result: MethodChannel.Result) {
-        result.success(permissionHelper.isLocationPermissionGranted())
+        result.success(
+            permissionHelper.isPermissionGranted(permission = Manifest.permission.ACCESS_FINE_LOCATION)
+        )
     }
 
     private fun onHandleRequestLocationPermission(result: MethodChannel.Result) {
-        permissionHelper.requestLocationPermission(
+        permissionHelper.requestPermission(
             activity = activity,
+            permission = Manifest.permission.ACCESS_FINE_LOCATION,
             resultCallback = object : PermissionResultCallback {
                 override fun onResult(granted: Boolean) {
                     mainHandler.post { result.success(granted) }

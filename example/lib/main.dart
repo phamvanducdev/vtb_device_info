@@ -5,6 +5,7 @@ import 'package:vtb_device_info_example/widgets/get_current_location.dart';
 import 'package:vtb_device_info_example/widgets/get_current_internet_status.dart';
 import 'package:vtb_device_info_example/widgets/get_device_info.dart';
 import 'package:vtb_device_info_example/widgets/listen_bluetooth_status_change.dart';
+import 'package:vtb_device_info_example/widgets/listen_current_location_background_change.dart';
 import 'package:vtb_device_info_example/widgets/listen_current_location_change.dart';
 import 'package:vtb_device_info_example/widgets/listen_internet_status_change.dart';
 
@@ -53,6 +54,8 @@ class _VtbDeviceInfoAppState extends State<VtbDeviceInfoApp> {
               GetCurrentLocationWidget(),
               Divider(height: 32),
               ListentCurrentLocationChangeWidget(),
+              Divider(height: 32),
+              ListentCurrentLocationBackgroundChangeWidget(),
               Divider(height: 32),
             ],
           ),

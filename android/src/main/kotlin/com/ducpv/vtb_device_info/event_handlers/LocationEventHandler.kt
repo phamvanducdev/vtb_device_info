@@ -10,7 +10,7 @@ import androidx.core.location.LocationManagerCompat
 import io.flutter.plugin.common.EventChannel
 
 internal class LocationEventHandler(
-    private val context: Context,
+    private val context: Context?,
 ) : EventChannel.StreamHandler {
     private val mainHandler = Handler(Looper.getMainLooper())
     private var eventSink: EventChannel.EventSink? = null
@@ -19,7 +19,7 @@ internal class LocationEventHandler(
 
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
         eventSink = events
-        mLocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        mLocationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         mLocationListener = LocationListener { mLocation -> sendEvent(mLocation) }
         if (mLocationManager != null) {
             if (LocationManagerCompat.isLocationEnabled(mLocationManager!!)) {

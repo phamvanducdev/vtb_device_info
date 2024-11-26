@@ -11,7 +11,7 @@ import com.ducpv.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
 internal class BluetoothEventHandler(
-    private val context: Context,
+    private val context: Context?,
     private val connectionHelper: ConnectionHelper,
 ) : EventChannel.StreamHandler {
     private var bluetoothReceiver: BroadcastReceiver? = null
@@ -32,7 +32,7 @@ internal class BluetoothEventHandler(
         }
 
         val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-        context.registerReceiver(bluetoothReceiver, filter)
+        context?.registerReceiver(bluetoothReceiver, filter)
 
         // Send current value at register time
         sendEvent(connectionHelper.isBluetoothEnabled())
@@ -40,7 +40,7 @@ internal class BluetoothEventHandler(
 
     override fun onCancel(arguments: Any?) {
         if (bluetoothReceiver != null) {
-            context.unregisterReceiver(bluetoothReceiver)
+            context?.unregisterReceiver(bluetoothReceiver)
         }
         bluetoothReceiver = null
         eventSink = null

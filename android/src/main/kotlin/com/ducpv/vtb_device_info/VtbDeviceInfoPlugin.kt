@@ -1,8 +1,10 @@
 package com.ducpv.vtb_device_info
 
 import android.app.Activity
+import android.content.Context
 import com.ducpv.vtb_device_info.event_handlers.BluetoothEventHandler
 import com.ducpv.vtb_device_info.event_handlers.InternetEventHandler
+import com.ducpv.vtb_device_info.event_handlers.LocationBackgroundEventHandler
 import com.ducpv.vtb_device_info.event_handlers.LocationEventHandler
 import com.ducpv.vtb_device_info.helpers.ConnectionHelper
 import com.ducpv.vtb_device_info.helpers.DeviceInfoHelper
@@ -20,6 +22,7 @@ class VtbDeviceInfoPlugin : FlutterPlugin, ActivityAware {
     private lateinit var internetEventChannel: EventChannel
     private lateinit var bluetoothEventChannel: EventChannel
     private lateinit var locationEventChannel: EventChannel
+    private lateinit var locationBackgroundEventChannel: EventChannel
 
     private lateinit var deviceInfoHelper: DeviceInfoHelper
     private lateinit var connectionHelper: ConnectionHelper
@@ -27,14 +30,20 @@ class VtbDeviceInfoPlugin : FlutterPlugin, ActivityAware {
     private lateinit var locationHelper: LocationHelper
 
     private var activity: Activity? = null
+    private var context: Context? = null
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        context = binding.applicationContext
+
         deviceInfoHelper = DeviceInfoHelper(context = binding.applicationContext)
         connectionHelper = ConnectionHelper(context = binding.applicationContext)
         permissionHelper = PermissionHelper(context = binding.applicationContext)
         locationHelper = LocationHelper(context = binding.applicationContext)
 
-        methodChannel = MethodChannel(binding.binaryMessenger, "vtb_device_info")
+        methodChannel = MethodChannel(
+            binding.binaryMessenger,
+            "vtb_device_info",
+        )
         methodChannel.setMethodCallHandler(
             MethodHandler(
                 activity = activity,
@@ -45,24 +54,47 @@ class VtbDeviceInfoPlugin : FlutterPlugin, ActivityAware {
             )
         )
 
-        internetEventChannel = EventChannel(binding.binaryMessenger, "vtb_device_info/internet")
+        internetEventChannel = EventChannel(
+            binding.binaryMessenger,
+            "vtb_device_info/internet",
+        )
         internetEventChannel.setStreamHandler(
             InternetEventHandler(
-                context = binding.applicationContext,
+                context = context,
                 connectionHelper = connectionHelper,
             )
         )
 
-        bluetoothEventChannel = EventChannel(binding.binaryMessenger, "vtb_device_info/bluetooth")
+        bluetoothEventChannel = EventChannel(
+            binding.binaryMessenger,
+            "vtb_device_info/bluetooth",
+        )
         bluetoothEventChannel.setStreamHandler(
             BluetoothEventHandler(
-                context = binding.applicationContext,
+                context = context,
                 connectionHelper = connectionHelper,
             )
         )
 
-        locationEventChannel = EventChannel(binding.binaryMessenger, "vtb_device_info/location")
-        locationEventChannel.setStreamHandler(LocationEventHandler(context = binding.applicationContext))
+        locationEventChannel = EventChannel(
+            binding.binaryMessenger,
+            "vtb_device_info/location",
+        )
+        locationEventChannel.setStreamHandler(
+            LocationEventHandler(context = context),
+        )
+
+        locationBackgroundEventChannel = EventChannel(
+            binding.binaryMessenger,
+            "vtb_device_info/location_background",
+        )
+        locationBackgroundEventChannel.setStreamHandler(
+            LocationBackgroundEventHandler(
+                context = context,
+                activity = activity,
+                permissionHelper = permissionHelper,
+            )
+        )
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
@@ -70,6 +102,7 @@ class VtbDeviceInfoPlugin : FlutterPlugin, ActivityAware {
         internetEventChannel.setStreamHandler(null)
         bluetoothEventChannel.setStreamHandler(null)
         locationEventChannel.setStreamHandler(null)
+        locationBackgroundEventChannel.setStreamHandler(null)
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
@@ -81,6 +114,13 @@ class VtbDeviceInfoPlugin : FlutterPlugin, ActivityAware {
                 connectionHelper = connectionHelper,
                 permissionHelper = permissionHelper,
                 locationHelper = locationHelper,
+            )
+        )
+        locationBackgroundEventChannel.setStreamHandler(
+            LocationBackgroundEventHandler(
+                context = context,
+                activity = activity,
+                permissionHelper = permissionHelper,
             )
         )
         binding.addRequestPermissionsResultListener(permissionHelper)
@@ -95,6 +135,13 @@ class VtbDeviceInfoPlugin : FlutterPlugin, ActivityAware {
                 connectionHelper = connectionHelper,
                 permissionHelper = permissionHelper,
                 locationHelper = locationHelper,
+            )
+        )
+        locationBackgroundEventChannel.setStreamHandler(
+            LocationBackgroundEventHandler(
+                context = context,
+                activity = activity,
+                permissionHelper = permissionHelper,
             )
         )
         binding.addRequestPermissionsResultListener(permissionHelper)

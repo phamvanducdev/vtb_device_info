@@ -14,7 +14,7 @@ import com.ducpv.vtb_device_info.helpers.ConnectionHelper
 import io.flutter.plugin.common.EventChannel
 
 internal class InternetEventHandler(
-    private val context: Context,
+    private val context: Context?,
     private val connectionHelper: ConnectionHelper,
 ) : EventChannel.StreamHandler {
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
@@ -35,7 +35,7 @@ internal class InternetEventHandler(
                 }
             }
             val connectivityManager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             connectivityManager.registerDefaultNetworkCallback(networkCallback!!)
         } else {
             receiver = object : BroadcastReceiver() {
@@ -45,7 +45,7 @@ internal class InternetEventHandler(
                 }
             }
             val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-            context.registerReceiver(receiver, intentFilter)
+            context?.registerReceiver(receiver, intentFilter)
         }
 
     }
@@ -54,12 +54,12 @@ internal class InternetEventHandler(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (networkCallback != null) {
                 val connectivityManager =
-                    context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                    context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 connectivityManager.unregisterNetworkCallback(networkCallback!!)
             }
         } else {
             if (receiver != null) {
-                context.unregisterReceiver(receiver)
+                context?.unregisterReceiver(receiver)
             }
         }
         eventSink = null
